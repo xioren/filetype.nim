@@ -4,8 +4,10 @@ import types/all
 import match, helpers
 
 
-var
-  mimetypesDB = newMimetypes()
+# NOTE: based on https://github.com/h2non/filetype.py
+
+
+let mimetypesDB = newMimetypes()
 
 
 proc guess*(path: string): string =

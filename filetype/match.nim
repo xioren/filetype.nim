@@ -3,12 +3,9 @@ import os
 import types/all
 import utils
 
-# NOTE: based on https://github.com/h2non/filetype.py
 
 proc match*(path: string, matchers: seq[proc]): string =
-  var
-    ext: string
-
+  var ext: string
   let magic = getSignatureBytes(path)
 
   for matcher in matchers:
@@ -18,10 +15,9 @@ proc match*(path: string, matchers: seq[proc]): string =
 
 
 proc match*(path: string, matchers: seq[seq[proc]]): string =
-  var
-    ext: string
-
+  var ext: string
   let magic = getSignatureBytes(path)
+
   # TEMP: until a more eloquent solution for combining procs with and without
   # side effects into a single seq is found
   for matcher in specialMatchers:

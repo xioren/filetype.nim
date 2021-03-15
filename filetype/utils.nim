@@ -1,10 +1,8 @@
 import os
 
 
-const
-  signatureBytes = 262
-var
-  f: File
+const signatureBytes = 262
+var f: File
 
 
 proc getSignatureBytes*(path: string): string =
