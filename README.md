@@ -19,5 +19,5 @@ proc main(path: string) =
 
 
 when isMainModule:
-    main("/path/to/sample.jpeg")
+  main("/path/to/sample.jpeg")
 ```
