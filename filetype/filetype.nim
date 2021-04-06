@@ -4,9 +4,6 @@ import types/all
 import match, helpers
 
 
-# NOTE: based on https://github.com/h2non/filetype.py
-
-
 let mimetypesDB = newMimetypes()
 
 

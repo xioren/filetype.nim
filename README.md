@@ -6,13 +6,12 @@ import filetype
 
 
 proc main(path: string) =
-  let
-    ext = guess(path)
+  let ext = guess(path)
+
   if ext == "":
     echo "Cannot guess file type!"
   else:
-    let
-      mime = guessMime(path)
+    let mime = guessMime(path)
 
     echo "File extension: ", ext
     echo "File MIME type: ", mime
