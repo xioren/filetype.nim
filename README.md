@@ -6,17 +6,15 @@ import filetype
 
 
 proc main(path: string) =
-  let ext = guess(path)
+  let kind = guess(path)
 
-  if ext == "":
+  if kind.extension == "":
     echo "Cannot guess file type!"
   else:
-    let mime = guessMime(path)
-
-    echo "File extension: ", ext
-    echo "File MIME type: ", mime
+    echo "File extension: ", kind.extension
+    echo "File MIME type: ", kind.mime
 
 
 when isMainModule:
-  main("/path/to/sample.jpeg")
+  main("/path/to/sample.ext")
 ```

@@ -7,10 +7,11 @@ import match, helpers
 let mimetypesDB = newMimetypes()
 
 
-proc guess*(path: string): string =
-  match(path, allMatchers)
+type Kind = object
+  extension*: string
+  mime*: string
 
 
-proc guessMime*(path: string): string =
+proc guess*(path: string): Kind =
   let ext = match(path, allMatchers)
-  getMimetype(mimetypesDB, ext, default="")
+  Kind(extension: ext, mime: getMimetype(mimetypesDB, ext, default=""))
