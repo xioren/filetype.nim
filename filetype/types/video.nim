@@ -39,7 +39,7 @@ proc isM4v*(buf: string): string =
 
 
 proc isMkv*(buf: string): string =
-  if buf.len > 30 and
+  if buf.len > 31 and
   buf[0].byte == 0x1A and
   buf[1].byte == 0x45 and
   buf[2].byte == 0xDF and
@@ -84,7 +84,7 @@ proc isMpeg*(buf: string): string =
 
 
 proc isWebm*(buf: string): string =
-  if buf.len > 26 and
+  if buf.len > 27 and
   buf[0].byte == 0x1A and
   buf[1].byte == 0x45 and
   buf[2].byte == 0xDF and
