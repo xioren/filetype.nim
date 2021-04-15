@@ -23,7 +23,7 @@ const
                        isDeb,
                        isAr,
                        isZ,
-                       isLzip]
+                       isLz]
 
   audioMatchers* = @[isMp3,
                      isM4a,

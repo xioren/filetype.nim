@@ -4,53 +4,51 @@ import types/all
 import utils
 
 
-proc match*(path: string, matchers: seq[proc]): string =
-  var ext: string
+proc match*(path: string, matchers: seq[proc]): tuple =
   let magic = getSignatureBytes(path)
 
   for matcher in matchers:
-    ext = matcher(magic)
-    if not (ext == ""):
-      return ext
+    result = matcher(magic)
+    if not (result.extension == ""):
+      break
 
 
-proc match*(path: string, matchers: seq[seq[proc]]): string =
-  var ext: string
+proc match*(path: string, matchers: seq[seq[proc]]): tuple =
   let magic = getSignatureBytes(path)
 
   # TEMP: until a more eloquent solution for combining procs with and without
   # side effects into a single seq is found
   for matcher in specialMatchers:
-    ext = matcher(magic)
-    if not (ext == ""):
-      return ext
+    result = matcher(magic)
+    if not (result.extension == ""):
+      return result
 
   for matcherType in matchers:
     for matcher in matcherType:
-      ext = matcher(magic)
-      if not (ext == ""):
-        return ext
+      result = matcher(magic)
+      if not (result.extension == ""):
+        return result
 
 
-proc imageMatch*(path: string): string =
+proc imageMatch*(path: string): tuple =
   match(path, imageMatchers)
 
 
-proc fontMatch*(path: string): string =
+proc fontMatch*(path: string): tuple =
   match(path, fontMatchers)
 
 
-proc videoMatch*(path: string): string =
+proc videoMatch*(path: string): tuple =
   match(path, videoMatchers)
 
 
-proc audioMatch*(path: string): string =
+proc audioMatch*(path: string): tuple =
   match(path, audioMatchers)
 
 
-proc archiveMatch*(path: string): string =
+proc archiveMatch*(path: string): tuple =
   match(path, archiveMatchers)
 
 
-proc applicationMatch*(path: string): string =
+proc applicationMatch*(path: string): tuple =
   match(path, applicationMatchers)

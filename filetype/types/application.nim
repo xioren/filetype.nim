@@ -1,4 +1,4 @@
-proc isWasm*(buf: string): string =
+proc isWasm*(buf: string): tuple[extension, mime: string] =
   ## web assembly
   if buf[0].byte == 0x00 and
   buf[1].byte == 0x61 and
@@ -8,4 +8,4 @@ proc isWasm*(buf: string): string =
   buf[5].byte == 0x00 and
   buf[6].byte == 0x00 and
   buf[8].byte == 0x00:
-    result = "wasm"
+    result = ("wasm", "application/wasm")
