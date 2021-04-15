@@ -2,68 +2,68 @@ import application, archive, audio, font, image, video
 
 
 const
-  archiveMatchers* = @[is_epub,
-                       is_zip,
-                       is_tar,
-                       is_rar,
-                       is_gzip,
-                       is_bz2,
-                       is_7zip,
-                       is_pdf,
-                       is_exe,
-                       is_swf,
-                       is_rtf,
-                       is_nes,
-                       is_crx,
-                       is_cab,
-                       is_eot,
-                       is_ps,
-                       is_xz,
-                       is_sqlite,
-                       is_deb,
-                       is_ar,
-                       is_z,
-                       is_lzip]
+  archiveMatchers* = @[isEpub,
+                       isZip,
+                       isTar,
+                       isRar,
+                       isGzip,
+                       isBz2,
+                       is7zip,
+                       isPdf,
+                       isExe,
+                       isSwf,
+                       isRtf,
+                       isNes,
+                       isCrx,
+                       isCab,
+                       isEot,
+                       isPs,
+                       isXz,
+                       isSqlite,
+                       isDeb,
+                       isAr,
+                       isZ,
+                       isLzip]
 
-  audioMatchers* = @[is_mp3,
-                     is_m4a,
-                     is_ogg,
-                     is_flac,
-                     is_wav,
-                     is_midi,
-                     is_amr]
+  audioMatchers* = @[isMp3,
+                     isM4a,
+                     isOgg,
+                     isFlac,
+                     isWav,
+                     isMidi,
+                     isAmr]
 
-  fontMatchers* = @[is_woff,
-                    is_woff2,
-                    is_ttf,
-                    is_otf]
+  fontMatchers* = @[isWoff,
+                    isWoff2,
+                    isTtf,
+                    isOtf]
 
-  imageMatchers* = @[is_jpeg,
-                     is_jpx,
-                     is_png,
-                     is_gif,
-                     is_webp,
-                     is_cr2,
-                     is_tiff,
-                     is_bmp,
-                     is_jxr,
-                     is_psd,
-                     is_ico,
-                     is_dcm]
+  imageMatchers* = @[isJpeg,
+                     isJpx,
+                     isPng,
+                     isGif,
+                     isWebp,
+                     isCr2,
+                     isTiff,
+                     isBmp,
+                     isJxr,
+                     isPsd,
+                     isIco,
+                     isDcm]
 
-  videoMatchers* = @[is_mkv,
-                     is_webm,
-                     is_avi,
-                     is_wmv,
-                     is_flv,
-                     is_m4v]
+  videoMatchers* = @[isMkv,
+                     isWebm,
+                     isAvi,
+                     isWmv,
+                     isFlv,
+                     isM4v]
 
-  applicationMatchers* = @[is_wasm]
+  applicationMatchers* = @[isWasm]
 
   # NOTE: special == procs with side effects
-  specialMatchers* = @[is_mp4,
-                       is_mov,
-                       is_heic]
+  specialMatchers* = @[isMp4,
+                       isMov,
+                       isHeic]
 
   allMatchers* = @[archiveMatchers,
                    audioMatchers,

@@ -1,4 +1,4 @@
-proc is_wasm*(buf: string): string =
+proc isWasm*(buf: string): string =
   ## web assembly
   if buf[0].byte == 0x00 and
   buf[1].byte == 0x61 and

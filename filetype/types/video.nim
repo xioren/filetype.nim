@@ -1,7 +1,7 @@
 include isobmff
 
 
-proc is_avi*(buf: string): string =
+proc isAvi*(buf: string): string =
   if buf.len > 10 and
   buf[0].byte == 0x52 and
   buf[1].byte == 0x49 and
@@ -13,7 +13,7 @@ proc is_avi*(buf: string): string =
     result = "avi"
 
 
-proc is_flv*(buf: string): string =
+proc isFlv*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x46 and
   buf[1].byte == 0x4C and
@@ -22,7 +22,7 @@ proc is_flv*(buf: string): string =
     result = "flv"
 
 
-proc is_m4v*(buf: string): string =
+proc isM4v*(buf: string): string =
   if buf.len > 10 and
   buf[0].byte == 0x0 and
   buf[1].byte == 0x0 and
@@ -38,55 +38,42 @@ proc is_m4v*(buf: string): string =
     result = "m4v"
 
 
-proc is_mkv*(buf: string): string =
-  if (buf.len > 15 and
+proc isMkv*(buf: string): string =
+  if buf.len > 15 and
   buf[0].byte == 0x1A and
   buf[1].byte == 0x45 and
   buf[2].byte == 0xDF and
   buf[3].byte == 0xA3 and
-  buf[4].byte == 0x93 and
-  buf[5].byte == 0x42 and
-  buf[6].byte == 0x82 and
-  buf[7].byte == 0x88 and
-  buf[8].byte == 0x6D and
-  buf[9].byte == 0x61 and
-  buf[10].byte == 0x74 and
-  buf[11].byte == 0x72 and
-  buf[12].byte == 0x6F and
-  buf[13].byte == 0x73 and
-  buf[14].byte == 0x6B and
-  buf[15].byte == 0x61) or
-  (buf.len > 38 and
-   buf[31].byte == 0x6D and
-   buf[32].byte == 0x61 and
-   buf[33].byte == 0x74 and
-   buf[34].byte == 0x72 and
-   buf[35].byte == 0x6f and
-   buf[36].byte == 0x73 and
-   buf[37].byte == 0x6B and
-   buf[38].byte == 0x61):
+  buf[24] == 'm' and
+  buf[25] == 'a' and
+  buf[26] == 't' and
+  buf[27] == 'r' and
+  buf[28] == 'o' and
+  buf[29] == 's' and
+  buf[30] == 'k' and
+  buf[31] == 'a':
     result = "mkv"
 
 
-proc is_mov*(buf: string): string =
-  if not is_isobmff(buf):
+proc isMov*(buf: string): string =
+  if not isIsobmff(buf):
     return ""
   let
-    (major_brand, minor_version, compatible_brands) = get_ftype(buf)
-  if major_brand == "qt  ":
+    (majorBrand, minorVersion, compatibleBrands) = getFtype(buf)
+  if majorBrand == "qt  ":
     result = "mov"
 
 
-proc is_mp4*(buf: string): string =
-  if not is_isobmff(buf):
+proc isMp4*(buf: string): string =
+  if not isIsobmff(buf):
     return ""
   let
-    (major_brand, minor_version, compatible_brands) = get_ftype(buf)
-  if major_brand in ["mp41", "mp42", "isom", "dash"]:
+    (majorBrand, minorVersion, compatibleBrands) = getFtype(buf)
+  if majorBrand in ["mp41", "mp42", "isom", "dash"]:
     result = "mp4"
 
 
-proc is_mpeg*(buf: string): string =
+proc isMpeg*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x0 and
   buf[1].byte == 0x0 and
@@ -96,16 +83,20 @@ proc is_mpeg*(buf: string): string =
     result = "mpeg"
 
 
-proc is_webm*(buf: string): string =
+proc isWebm*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x1A and
   buf[1].byte == 0x45 and
   buf[2].byte == 0xDF and
-  buf[3].byte == 0xA3:
+  buf[3].byte == 0xA3 and
+  buf[24] == 'w' and
+  buf[25] == 'e' and
+  buf[26] == 'b' and
+  buf[27] == 'm':
     result = "webm"
 
 
-proc is_wmv*(buf: string): string =
+proc isWmv*(buf: string): string =
   if buf.len > 9 and
   buf[0].byte == 0x30 and
   buf[1].byte == 0x26 and

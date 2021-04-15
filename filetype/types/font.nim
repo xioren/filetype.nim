@@ -1,4 +1,4 @@
-proc is_otf*(buf: string): string =
+proc isOtf*(buf: string): string =
   if buf.len > 4 and
   buf[0].byte == 0x4F and
   buf[1].byte == 0x54 and
@@ -8,7 +8,7 @@ proc is_otf*(buf: string): string =
     result = "otf"
 
 
-proc is_ttf*(buf: string): string =
+proc isTtf*(buf: string): string =
   if buf.len > 4 and
   buf[0].byte == 0x00 and
   buf[1].byte == 0x01 and
@@ -18,7 +18,7 @@ proc is_ttf*(buf: string): string =
     result = "ttf"
 
 
-proc is_woff*(buf: string): string =
+proc isWoff*(buf: string): string =
   if buf.len > 7 and
   buf[0].byte == 0x77 and
   buf[1].byte == 0x4F and
@@ -31,7 +31,7 @@ proc is_woff*(buf: string): string =
     result = "woff"
 
 
-proc is_woff2*(buf: string): string =
+proc isWoff2*(buf: string): string =
   if buf.len > 7 and
   buf[0].byte == 0x77 and
   buf[1].byte == 0x4F and

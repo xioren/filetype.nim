@@ -1,7 +1,7 @@
 import strutils
 
 
-proc is_isobmff(buf: string): bool =
+proc isIsobmff(buf: string): bool =
   if buf.len < 16 or buf[4..<8] != "ftyp":
     result = false
   elif buf.len < parseHexInt(toHex(buf[0..<4])):
@@ -10,15 +10,15 @@ proc is_isobmff(buf: string): bool =
     result = true
 
 
-proc get_ftype(buf: string): tuple[x: string, y: int, z: seq[string]] =
+proc getFtype(buf: string): tuple[x: string, y: int, z: seq[string]] =
   let
-    ftype_len = parseHexInt(toHex(buf[0..<4]))
-    major_brand = buf[8..<12]
-    minor_version = parseHexInt(toHex(buf[12..<16]))
+    ftypeLen = parseHexInt(toHex(buf[0..<4]))
+    majorBrand = buf[8..<12]
+    minorVersion = parseHexInt(toHex(buf[12..<16]))
   var
-    compatible_brands: seq[string] = @[]
+    compatibleBrands: seq[string] = @[]
 
-  for i in countup(16, ftype_len - 1, 4):
-    compatible_brands.add(buf[i..<i+4])
+  for i in countup(16, ftypeLen - 1, 4):
+    compatibleBrands.add(buf[i..<i+4])
 
-  result = (major_brand, minor_version, compatible_brands)
+  result = (majorBrand, minorVersion, compatibleBrands)

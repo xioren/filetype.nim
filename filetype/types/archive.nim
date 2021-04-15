@@ -1,4 +1,4 @@
-proc is_7zip*(buf: string): string =
+proc is7zip*(buf: string): string =
   if buf.len > 5 and
   buf[0].byte == 0x37 and
   buf[1].byte == 0x7A and
@@ -9,7 +9,7 @@ proc is_7zip*(buf: string): string =
     result = "7z"
 
 
-proc is_ar*(buf: string): string =
+proc isAr*(buf: string): string =
   if buf.len > 6 and
   buf[0].byte == 0x21 and
   buf[1].byte == 0x3C and
@@ -21,7 +21,7 @@ proc is_ar*(buf: string): string =
     result = "ar"
 
 
-proc is_bz2*(buf: string): string =
+proc isBz2*(buf: string): string =
   if buf.len > 2 and
   buf[0].byte == 0x42 and
   buf[1].byte == 0x5A and
@@ -29,7 +29,7 @@ proc is_bz2*(buf: string): string =
     result = "bz2"
 
 
-proc is_cab*(buf: string): string =
+proc isCab*(buf: string): string =
   if buf.len > 3 and
   (buf[0].byte == 0x4D and
    buf[1].byte == 0x53 and
@@ -42,7 +42,7 @@ proc is_cab*(buf: string): string =
      result = "cab"
 
 
-proc is_crx*(buf: string): string =
+proc isCrx*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x43 and
   buf[1].byte == 0x72 and
@@ -51,7 +51,7 @@ proc is_crx*(buf: string): string =
     result = "crx"
 
 
-proc is_deb*(buf: string): string =
+proc isDeb*(buf: string): string =
   if buf.len > 20 and
   buf[0].byte == 0x21 and
   buf[1].byte == 0x3C and
@@ -77,7 +77,7 @@ proc is_deb*(buf: string): string =
     result = "deb"
 
 
-proc is_eot*(buf: string): string =
+proc isEot*(buf: string): string =
   if buf.len > 35 and
   buf[34].byte == 0x4C and
   buf[35].byte == 0x50 and
@@ -93,7 +93,7 @@ proc is_eot*(buf: string): string =
      result = "eot"
 
 
-proc is_epub*(buf: string): string =
+proc isEpub*(buf: string): string =
   if buf.len > 57 and
   buf[0].byte == 0x50 and
   buf[1].byte == 0x4B and
@@ -130,14 +130,14 @@ proc is_epub*(buf: string): string =
     result = "epub"
 
 
-proc is_exe*(buf: string): string =
+proc isExe*(buf: string): string =
   if buf.len > 1 and
   buf[0].byte == 0x4D and
   buf[1].byte == 0x5A:
     result = "exe"
 
 
-proc is_gzip*(buf: string): string =
+proc isGzip*(buf: string): string =
   if buf.len > 2 and
   buf[0].byte == 0x1F and
   buf[1].byte == 0x8B and
@@ -145,7 +145,7 @@ proc is_gzip*(buf: string): string =
     result = "gz"
 
 
-proc is_lzip*(buf: string): string =
+proc isLzip*(buf: string): string =
  if buf.len > 3 and
  buf[0].byte == 0x4C and
  buf[1].byte == 0x5A and
@@ -154,7 +154,7 @@ proc is_lzip*(buf: string): string =
    result = "lz"
 
 
-proc is_nes*(buf: string): string =
+proc isNes*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x4E and
   buf[1].byte == 0x45 and
@@ -163,7 +163,7 @@ proc is_nes*(buf: string): string =
     result = "nes"
 
 
-proc is_pdf*(buf: string): string =
+proc isPdf*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x25 and
   buf[1].byte == 0x50 and
@@ -172,14 +172,14 @@ proc is_pdf*(buf: string): string =
     result = "pdf"
 
 
-proc is_ps*(buf: string): string =
+proc isPs*(buf: string): string =
   if buf.len > 1 and
   buf[0].byte == 0x25 and
   buf[1].byte == 0x21:
     result = "ps"
 
 
-proc is_rar*(buf: string): string =
+proc isRar*(buf: string): string =
   if buf.len > 6 and
   buf[0].byte == 0x52 and
   buf[1].byte == 0x61 and
@@ -192,7 +192,7 @@ proc is_rar*(buf: string): string =
      result = "rar"
 
 
-proc is_rtf*(buf: string): string =
+proc isRtf*(buf: string): string =
   if buf.len > 4 and
   buf[0].byte == 0x7B and
   buf[1].byte == 0x5C and
@@ -202,7 +202,7 @@ proc is_rtf*(buf: string): string =
     result = "rtf"
 
 
-proc is_sqlite*(buf: string): string =
+proc isSqlite*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x53 and
   buf[1].byte == 0x51 and
@@ -211,7 +211,7 @@ proc is_sqlite*(buf: string): string =
     result = "sqlite"
 
 
-proc is_swf*(buf: string): string =
+proc isSwf*(buf: string): string =
   if buf.len > 2 and
   (buf[0].byte == 0x43 or
    buf[0].byte == 0x46) and
@@ -220,7 +220,7 @@ proc is_swf*(buf: string): string =
     result = "swf"
 
 
-proc is_tar*(buf: string): string =
+proc isTar*(buf: string): string =
   if buf.len > 261 and
   buf[257].byte == 0x75 and
   buf[258].byte == 0x73 and
@@ -230,7 +230,7 @@ proc is_tar*(buf: string): string =
     result = "tar"
 
 
-proc is_xz*(buf: string): string =
+proc isXz*(buf: string): string =
   if buf.len > 5 and
   buf[0].byte == 0xFD and
   buf[1].byte == 0x37 and
@@ -241,7 +241,7 @@ proc is_xz*(buf: string): string =
     result = "xz"
 
 
-proc is_z*(buf: string): string =
+proc isZ*(buf: string): string =
   if buf.len > 1 and
   (buf[0].byte == 0x1F and
    buf[1].byte == 0xA0) or
@@ -250,7 +250,7 @@ proc is_z*(buf: string): string =
      result = "Z"
 
 
-proc is_zip*(buf: string): string =
+proc isZip*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x50 and
   buf[1].byte == 0x4B and

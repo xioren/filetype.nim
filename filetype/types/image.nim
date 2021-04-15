@@ -1,14 +1,14 @@
 include isobmff
 
 
-proc is_bmp*(buf: string): string =
+proc isBmp*(buf: string): string =
   if buf.len > 1 and
   buf[0].byte == 0x42 and
   buf[1].byte == 0x4D:
     result = "bpm"
 
 
-proc is_cr2*(buf: string): string =
+proc isCr2*(buf: string): string =
   if buf.len > 9 and
   ((buf[0].byte == 0x49 and
     buf[1].byte == 0x49 and
@@ -23,7 +23,7 @@ proc is_cr2*(buf: string): string =
      result = "cr2"
 
 
-proc is_dcm*(buf: string): string =
+proc isDcm*(buf: string): string =
  const offset = 128
  if buf.len > offset + 4 and
  buf[offset + 0].byte == 0x44 and
@@ -33,7 +33,7 @@ proc is_dcm*(buf: string): string =
    result = "dcm"
 
 
-proc is_gif*(buf: string): string =
+proc isGif*(buf: string): string =
   if len(buf) > 2 and
   buf[0].byte == 0x47 and
   buf[1].byte == 0x49 and
@@ -41,7 +41,7 @@ proc is_gif*(buf: string): string =
     result = "gif"
 
 
-proc is_heic*(buf: string): string =
+proc isHeic*(buf: string): string =
   if not is_isobmff(buf):
       return ""
   const
@@ -54,7 +54,7 @@ proc is_heic*(buf: string): string =
     result = "heic"
 
 
-proc is_ico*(buf: string): string =
+proc isIco*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x00 and
   buf[1].byte == 0x00 and
@@ -63,7 +63,7 @@ proc is_ico*(buf: string): string =
     result = "ico"
 
 
-proc is_jpeg*(buf: string): string =
+proc isJpeg*(buf: string): string =
   if buf.len > 2 and
   buf[0].byte == 0xFF and
   buf[1].byte == 0xD8 and
@@ -71,7 +71,7 @@ proc is_jpeg*(buf: string): string =
     result = "jpeg"
 
 
-proc is_jpx*(buf: string): string =
+proc isJpx*(buf: string): string =
   if buf.len > 50 and
   buf[0].byte == 0x00 and
   buf[1].byte == 0x00 and
@@ -81,7 +81,7 @@ proc is_jpx*(buf: string): string =
     result = "jpx"
 
 
-proc is_jxr*(buf: string): string =
+proc isJxr*(buf: string): string =
   if buf.len > 2 and
   buf[0].byte == 0x49 and
   buf[1].byte == 0x49 and
@@ -89,7 +89,7 @@ proc is_jxr*(buf: string): string =
     result = "jxr"
 
 
-proc is_png*(buf: string): string =
+proc isPng*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x89 and
   buf[1].byte == 0x50 and
@@ -98,7 +98,7 @@ proc is_png*(buf: string): string =
     result = "png"
 
 
-proc is_psd*(buf: string): string =
+proc isPsd*(buf: string): string =
   if buf.len > 3 and
   buf[0].byte == 0x38 and
   buf[1].byte == 0x42 and
@@ -107,7 +107,7 @@ proc is_psd*(buf: string): string =
     result = "psd"
 
 
-proc is_tiff*(buf: string): string =
+proc isTiff*(buf: string): string =
   if buf.len > 3 and
   (buf[0].byte == 0x49 and
    buf[1].byte == 0x49 and
@@ -120,7 +120,7 @@ proc is_tiff*(buf: string): string =
     result = "tiff"
 
 
-proc is_webp*(buf: string): string =
+proc isWebp*(buf: string): string =
   if len(buf) > 13 and
   buf[0].byte == 0x52 and
   buf[1].byte == 0x49 and
