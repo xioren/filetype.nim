@@ -20,17 +20,17 @@ proc isFlac*(buf: string): tuple[extension, mime: string] =
 
 proc isM4a*(buf: string): tuple[extension, mime: string] =
   if buf.len > 10 and
-  (buf[4].byte == 0x66 and
-   buf[5].byte == 0x74 and
-   buf[6].byte == 0x79 and
-   buf[7].byte == 0x70 and
-   buf[8].byte == 0x4D and
-   buf[9].byte == 0x34 and
-   buf[10].byte == 0x41) or
-  (buf[0].byte == 0x4D and
-   buf[1].byte == 0x34 and
-   buf[2].byte == 0x41 and
-   buf[3].byte == 0x20):
+  ((buf[4].byte == 0x66 and
+    buf[5].byte == 0x74 and
+    buf[6].byte == 0x79 and
+    buf[7].byte == 0x70 and
+    buf[8].byte == 0x4D and
+    buf[9].byte == 0x34 and
+    buf[10].byte == 0x41) or
+   (buf[0].byte == 0x4D and
+    buf[1].byte == 0x34 and
+    buf[2].byte == 0x41 and
+    buf[3].byte == 0x20)):
     result = ("m4a", "audio/m4a")
 
 
@@ -45,11 +45,11 @@ proc isMidi*(buf: string): tuple[extension, mime: string] =
 
 proc isMp3*(buf: string): tuple[extension, mime: string] =
   if buf.len > 2 and
-  (buf[0].byte == 0x49 and
-   buf[1].byte == 0x44 and
-   buf[2].byte == 0x33) or
-  (buf[0].byte == 0xFF and
-   buf[1].byte == 0xfb):
+  ((buf[0].byte == 0x49 and
+    buf[1].byte == 0x44 and
+    buf[2].byte == 0x33) or
+   (buf[0].byte == 0xFF and
+    buf[1].byte == 0xfb)):
      result = ("mp3", "audio/mpeg")
 
 

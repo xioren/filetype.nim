@@ -16,5 +16,5 @@ proc main(path: string) =
 
 
 when isMainModule:
-  main("/path/to/sample.ext")
+  main("/path/to/file.ext")
 ```

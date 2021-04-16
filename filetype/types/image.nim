@@ -109,14 +109,14 @@ proc isPsd*(buf: string): tuple[extension, mime: string] =
 
 proc isTiff*(buf: string): tuple[extension, mime: string] =
   if buf.len > 3 and
-  (buf[0].byte == 0x49 and
-   buf[1].byte == 0x49 and
-   buf[2].byte == 0x2A and
-   buf[3].byte == 0x0) or
-  (buf[0].byte == 0x4D and
-   buf[1].byte == 0x4D and
-   buf[2].byte == 0x0 and
-   buf[3].byte == 0x2A):
+  ((buf[0].byte == 0x49 and
+    buf[1].byte == 0x49 and
+    buf[2].byte == 0x2A and
+    buf[3].byte == 0x0) or
+   (buf[0].byte == 0x4D and
+    buf[1].byte == 0x4D and
+    buf[2].byte == 0x0 and
+    buf[3].byte == 0x2A)):
     result = ("tiff", "image/tiff")
 
 

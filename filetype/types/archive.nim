@@ -31,14 +31,14 @@ proc isBz2*(buf: string): tuple[extension, mime: string] =
 
 proc isCab*(buf: string): tuple[extension, mime: string] =
   if buf.len > 3 and
-  (buf[0].byte == 0x4D and
-   buf[1].byte == 0x53 and
-   buf[2].byte == 0x43 and
-   buf[3].byte == 0x46) or
-  (buf[0].byte == 0x49 and
-   buf[1].byte == 0x53 and
-   buf[2].byte == 0x63 and
-   buf[3].byte == 0x28):
+  ((buf[0].byte == 0x4D and
+    buf[1].byte == 0x53 and
+    buf[2].byte == 0x43 and
+    buf[3].byte == 0x46) or
+   (buf[0].byte == 0x49 and
+    buf[1].byte == 0x53 and
+    buf[2].byte == 0x63 and
+    buf[3].byte == 0x28)):
      result = ("cab", "application/vnd.ms-cab-compressed")
 
 
@@ -79,17 +79,17 @@ proc isDeb*(buf: string): tuple[extension, mime: string] =
 
 proc isEot*(buf: string): tuple[extension, mime: string] =
   if buf.len > 35 and
-  buf[34].byte == 0x4C and
-  buf[35].byte == 0x50 and
-  (buf[8].byte == 0x02 and
-   buf[9].byte == 0x00 and
-   buf[10].byte == 0x01) or
-  (buf[8].byte == 0x01 and
-   buf[9].byte == 0x00 and
-   buf[10].byte == 0x00) or
-  (buf[8].byte == 0x02 and
-   buf[9].byte == 0x00 and
-   buf[10].byte == 0x02):
+  (buf[34].byte == 0x4C and
+   buf[35].byte == 0x50 and
+   (buf[8].byte == 0x02 and
+    buf[9].byte == 0x00 and
+    buf[10].byte == 0x01) or
+   (buf[8].byte == 0x01 and
+    buf[9].byte == 0x00 and
+    buf[10].byte == 0x00) or
+   (buf[8].byte == 0x02 and
+    buf[9].byte == 0x00 and
+    buf[10].byte == 0x02)):
      result = ("eot", "application/octet-stream")
 
 
@@ -243,10 +243,10 @@ proc isXz*(buf: string): tuple[extension, mime: string] =
 
 proc isZ*(buf: string): tuple[extension, mime: string] =
   if buf.len > 1 and
-  (buf[0].byte == 0x1F and
-   buf[1].byte == 0xA0) or
-  (buf[0].byte == 0x1F and
-   buf[1].byte == 0x9D):
+  ((buf[0].byte == 0x1F and
+    buf[1].byte == 0xA0) or
+   (buf[0].byte == 0x1F and
+    buf[1].byte == 0x9D)):
      result = ("Z", "application/x-compress")
 
 
