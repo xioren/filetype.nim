@@ -1,4 +1,5 @@
-import match, helpers
+import
+  match, helpers
 
 
 proc guess*(path: string): tuple =

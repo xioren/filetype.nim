@@ -1,5 +1,3 @@
-import os
-
 import types/all
 import utils
 
@@ -17,13 +15,6 @@ proc match*(path: string, matchers: seq[proc]): tuple =
 proc match*(path: string): tuple =
   ## test against all supported matchers
   let magic = getSignatureBytes(path)
-
-  # TEMP: until a more eloquent solution for combining procs with and without
-  # side effects into a single seq is found
-  for matcher in specialMatchers:
-    result = matcher(magic)
-    if not (result.extension == ""):
-      return result
 
   for matcherType in allMatchers:
     for matcher in matcherType:

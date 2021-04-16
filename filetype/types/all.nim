@@ -1,4 +1,5 @@
-import application, archive, audio, font, image, video
+import
+  application, archive, audio, font, image, video
 
 
 const
@@ -69,4 +70,5 @@ const
                    audioMatchers,
                    fontMatchers,
                    imageMatchers,
+                   specialMatchers,
                    videoMatchers]
