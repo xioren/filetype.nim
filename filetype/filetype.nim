@@ -1,14 +1,13 @@
-import types/all
 import match, helpers
 
 
 proc guess*(path: string): tuple =
-  match(path, allMatchers)
+  match(path)
 
 
 proc guessMime*(path: string): string =
-  match(path, allMatchers).mime
+  match(path).mime
 
 
 proc guessExtension*(path: string): string =
-  match(path, allMatchers).extension
+  match(path).extension
