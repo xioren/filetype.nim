@@ -3,9 +3,9 @@ import strutils
 
 proc isIsobmff(buf: string): bool =
   if buf.len < 16 or buf[4..<8] != "ftyp":
-    result = false
+    discard
   elif buf.len < parseHexInt(toHex(buf[0..<4])):
-    result = false
+    discard
   else:
     result = true
 

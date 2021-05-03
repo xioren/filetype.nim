@@ -5,7 +5,7 @@ proc isBmp*(buf: string): tuple[extension, mime: string] =
   if buf.len > 1 and
   buf[0].byte == 0x42 and
   buf[1].byte == 0x4D:
-    result = ("bpm", "image/bmp")
+    result = ("bmp", "image/bmp")
 
 
 proc isCr2*(buf: string): tuple[extension, mime: string] =

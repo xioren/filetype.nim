@@ -69,7 +69,7 @@ proc isMp4*(buf: string): tuple[extension, mime: string] =
     return ("", "")
   let
     (majorBrand, minorVersion, compatibleBrands) = getFtype(buf)
-  if majorBrand in ["mp41", "mp42", "isom", "dash"]:
+  if majorBrand in ["mp41", "mp42", "dash", "isom", "iso2", "iso5", "iso6"]:
     result = ("mp4", "video/mp4")
 
 
