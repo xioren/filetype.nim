@@ -11,9 +11,9 @@ proc getSignatureBytes*(path: string): string =
     return ""
   result = newString(signatureBytes)
 
-  if f.open(path, fmRead, -1):
+  if f.open(path):
     try:
-      let i = readBuffer(f, addr(result[0]), signatureBytes)
+      let i = f.readChars(result, 0, signatureBytes)
       result.setLen(i)
     except OSError:
       echo "error reading: ", path
