@@ -19,7 +19,7 @@ proc match*(path: string): tuple =
   for matcherType in allMatchers:
     for matcher in matcherType:
       result = matcher(magic)
-      if not (result.extension == ""):
+      if result.extension != "":
         return result
 
 
