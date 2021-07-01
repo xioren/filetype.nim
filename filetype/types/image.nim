@@ -1,47 +1,49 @@
 include isobmff
 
+import ../utils
 
-proc isBmp*(buf: string): tuple[extension, mime: string] =
+
+proc isBmp*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 1 and
-  buf[0].byte == 0x42 and
-  buf[1].byte == 0x4D:
+  buf[0] == 0x42 and
+  buf[1] == 0x4D:
     result = ("bmp", "image/bmp")
 
 
-proc isCr2*(buf: string): tuple[extension, mime: string] =
+proc isCr2*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 9 and
-  ((buf[0].byte == 0x49 and
-    buf[1].byte == 0x49 and
-    buf[2].byte == 0x2A and
-    buf[3].byte == 0x0) or
-   (buf[0].byte == 0x4D and
-    buf[1].byte == 0x4D and
-    buf[2].byte == 0x0 and
-    buf[3].byte == 0x2A)) and
-   buf[8].byte == 0x43 and
-   buf[9].byte == 0x52:
+  ((buf[0] == 0x49 and
+    buf[1] == 0x49 and
+    buf[2] == 0x2A and
+    buf[3] == 0x0) or
+   (buf[0] == 0x4D and
+    buf[1] == 0x4D and
+    buf[2] == 0x0 and
+    buf[3] == 0x2A)) and
+   buf[8] == 0x43 and
+   buf[9] == 0x52:
      result = ("cr2", "image/x-canon-cr2")
 
 
-proc isDcm*(buf: string): tuple[extension, mime: string] =
+proc isDcm*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
  const offset = 128
  if buf.len > offset + 4 and
- buf[offset + 0].byte == 0x44 and
- buf[offset + 1].byte == 0x49 and
- buf[offset + 2].byte == 0x43 and
- buf[offset + 3].byte == 0x4D:
+ buf[offset + 0] == 0x44 and
+ buf[offset + 1] == 0x49 and
+ buf[offset + 2] == 0x43 and
+ buf[offset + 3] == 0x4D:
    result = ("dcm", "application/dicom")
 
 
-proc isGif*(buf: string): tuple[extension, mime: string] =
+proc isGif*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if len(buf) > 2 and
-  buf[0].byte == 0x47 and
-  buf[1].byte == 0x49 and
-  buf[2].byte == 0x46:
+  buf[0] == 0x47 and
+  buf[1] == 0x49 and
+  buf[2] == 0x46:
     result = ("gif", "image/gif")
 
 
-proc isHeic*(buf: string): tuple[extension, mime: string] =
+proc isHeic*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if not is_isobmff(buf):
       return ("", "")
   const
@@ -54,82 +56,82 @@ proc isHeic*(buf: string): tuple[extension, mime: string] =
     result = ("heic", "image/heic")
 
 
-proc isIco*(buf: string): tuple[extension, mime: string] =
+proc isIco*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 3 and
-  buf[0].byte == 0x00 and
-  buf[1].byte == 0x00 and
-  buf[2].byte == 0x01 and
-  buf[3].byte == 0x00:
+  buf[0] == 0x00 and
+  buf[1] == 0x00 and
+  buf[2] == 0x01 and
+  buf[3] == 0x00:
     result = ("ico", "image/x-icon")
 
 
-proc isJpeg*(buf: string): tuple[extension, mime: string] =
+proc isJpeg*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 2 and
-  buf[0].byte == 0xFF and
-  buf[1].byte == 0xD8 and
-  buf[2].byte == 0xFF:
+  buf[0] == 0xFF and
+  buf[1] == 0xD8 and
+  buf[2] == 0xFF:
     result = ("jpeg", "image/jpeg")
 
 
-proc isJpx*(buf: string): tuple[extension, mime: string] =
+proc isJpx*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 50 and
-  buf[0].byte == 0x00 and
-  buf[1].byte == 0x00 and
-  buf[2].byte == 0x00 and
-  buf[3].byte == 0x0C and
-  buf[16..<24] == "ftypjp2 ":
+  buf[0] == 0x00 and
+  buf[1] == 0x00 and
+  buf[2] == 0x00 and
+  buf[3] == 0x0C and
+  bytesToString(buf[16..<24]) == "ftypjp2 ":
     result = ("jpx", "image/jpx")
 
 
-proc isJxr*(buf: string): tuple[extension, mime: string] =
+proc isJxr*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 2 and
-  buf[0].byte == 0x49 and
-  buf[1].byte == 0x49 and
-  buf[2].byte == 0xBC:
+  buf[0] == 0x49 and
+  buf[1] == 0x49 and
+  buf[2] == 0xBC:
     result = ("jxr", "image/vnd.ms-photo")
 
 
-proc isPng*(buf: string): tuple[extension, mime: string] =
+proc isPng*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 3 and
-  buf[0].byte == 0x89 and
-  buf[1].byte == 0x50 and
-  buf[2].byte == 0x4E and
-  buf[3].byte == 0x47:
+  buf[0] == 0x89 and
+  buf[1] == 0x50 and
+  buf[2] == 0x4E and
+  buf[3] == 0x47:
     result = ("png", "image/png")
 
 
-proc isPsd*(buf: string): tuple[extension, mime: string] =
+proc isPsd*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 3 and
-  buf[0].byte == 0x38 and
-  buf[1].byte == 0x42 and
-  buf[2].byte == 0x50 and
-  buf[3].byte == 0x53:
+  buf[0] == 0x38 and
+  buf[1] == 0x42 and
+  buf[2] == 0x50 and
+  buf[3] == 0x53:
     result = ("psd", "image/vnd.adobe.photoshop")
 
 
-proc isTiff*(buf: string): tuple[extension, mime: string] =
+proc isTiff*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if buf.len > 3 and
-  ((buf[0].byte == 0x49 and
-    buf[1].byte == 0x49 and
-    buf[2].byte == 0x2A and
-    buf[3].byte == 0x0) or
-   (buf[0].byte == 0x4D and
-    buf[1].byte == 0x4D and
-    buf[2].byte == 0x0 and
-    buf[3].byte == 0x2A)):
+  ((buf[0] == 0x49 and
+    buf[1] == 0x49 and
+    buf[2] == 0x2A and
+    buf[3] == 0x0) or
+   (buf[0] == 0x4D and
+    buf[1] == 0x4D and
+    buf[2] == 0x0 and
+    buf[3] == 0x2A)):
     result = ("tiff", "image/tiff")
 
 
-proc isWebp*(buf: string): tuple[extension, mime: string] =
+proc isWebp*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
   if len(buf) > 13 and
-  buf[0].byte == 0x52 and
-  buf[1].byte == 0x49 and
-  buf[2].byte == 0x46 and
-  buf[3].byte == 0x46 and
-  buf[8].byte == 0x57 and
-  buf[9].byte == 0x45 and
-  buf[10].byte == 0x42 and
-  buf[11].byte == 0x50 and
-  buf[12].byte == 0x56 and
-  buf[13].byte == 0x50:
+  buf[0] == 0x52 and
+  buf[1] == 0x49 and
+  buf[2] == 0x46 and
+  buf[3] == 0x46 and
+  buf[8] == 0x57 and
+  buf[9] == 0x45 and
+  buf[10] == 0x42 and
+  buf[11] == 0x50 and
+  buf[12] == 0x56 and
+  buf[13] == 0x50:
     result = ("webp", "image/webp")

@@ -1,24 +1,25 @@
-import strutils
+import ../utils
 
 
-proc isIsobmff(buf: string): bool =
-  if buf.len < 16 or buf[4..<8] != "ftyp":
+proc isIsobmff(buf: array[signatureBytes, uint8]): bool =
+  if buf.len < 16 or bytesToString(buf[4..7]) != "ftyp":
+    # FIXME: buf.len will always be signatureBytes and not actual bytes read
     discard
-  elif buf.len < parseHexInt(toHex(buf[0..<4])):
+  if buf.len < bytesToInt(buf[0..3]):
     discard
   else:
     result = true
 
 
-proc getFtype(buf: string): tuple[x: string, y: int, z: seq[string]] =
+proc getFtype(buf: array[signatureBytes, uint8]): tuple[x: string, y: int, z: seq[string]] =
   let
-    ftypeLen = parseHexInt(toHex(buf[0..<4]))
-    majorBrand = buf[8..<12]
-    minorVersion = parseHexInt(toHex(buf[12..<16]))
+    ftypeLen = bytesToInt(buf[0..3])
+    majorBrand = bytesToString(buf[8..11])
+    minorVersion = bytesToInt(buf[12..15])
   var
     compatibleBrands: seq[string] = @[]
 
-  for i in countup(16, ftypeLen - 1, 4):
-    compatibleBrands.add(buf[i..<i+4])
+  for i in countup(16, pred(ftypeLen), 4):
+    compatibleBrands.add(bytesToString(buf[i..i+3]))
 
   result = (majorBrand, minorVersion, compatibleBrands)
