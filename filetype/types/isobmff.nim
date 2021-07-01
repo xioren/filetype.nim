@@ -1,9 +1,8 @@
 import ../utils
 
 
-proc isIsobmff(buf: array[signatureBytes, uint8]): bool =
+proc isIsobmff(buf: seq[uint8]): bool =
   if buf.len < 16 or bytesToString(buf[4..7]) != "ftyp":
-    # FIXME: buf.len will always be signatureBytes and not actual bytes read
     discard
   if buf.len < bytesToInt(buf[0..3]):
     discard
@@ -11,7 +10,7 @@ proc isIsobmff(buf: array[signatureBytes, uint8]): bool =
     result = true
 
 
-proc getFtype(buf: array[signatureBytes, uint8]): tuple[x: string, y: int, z: seq[string]] =
+proc getFtype(buf: seq[uint8]): tuple[x: string, y: int, z: seq[string]] =
   let
     ftypeLen = bytesToInt(buf[0..3])
     majorBrand = bytesToString(buf[8..11])

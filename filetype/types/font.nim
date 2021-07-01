@@ -1,7 +1,4 @@
-from ../utils import signatureBytes
-
-
-proc isOtf*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
+proc isOtf*(buf: seq[uint8]): tuple[extension, mime: string] =
   if buf.len > 4 and
   buf[0] == 0x4F and
   buf[1] == 0x54 and
@@ -11,7 +8,7 @@ proc isOtf*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
     result = ("otf", "application/font-sfnt")
 
 
-proc isTtf*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
+proc isTtf*(buf: seq[uint8]): tuple[extension, mime: string] =
   if buf.len > 4 and
   buf[0] == 0x00 and
   buf[1] == 0x01 and
@@ -21,7 +18,7 @@ proc isTtf*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
     result = ("ttf", "application/font-sfnt")
 
 
-proc isWoff*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
+proc isWoff*(buf: seq[uint8]): tuple[extension, mime: string] =
   if buf.len > 7 and
   buf[0] == 0x77 and
   buf[1] == 0x4F and
@@ -34,7 +31,7 @@ proc isWoff*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] 
     result = ("woff", "application/font-woff")
 
 
-proc isWoff2*(buf: array[signatureBytes, uint8]): tuple[extension, mime: string] =
+proc isWoff2*(buf: seq[uint8]): tuple[extension, mime: string] =
   if buf.len > 7 and
   buf[0] == 0x77 and
   buf[1] == 0x4F and

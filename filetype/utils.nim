@@ -4,27 +4,30 @@ import os, strutils
 const signatureBytes* = 262
 
 
-proc getSignatureBytes*(path: string): array[signatureBytes, uint8] =
-  var f: File
+proc getSignatureBytes*(path: string): seq[uint8] =
   if getFileSize(path) == 0:
     discard
   else:
+    var
+      f: File
+      buffer: array[signatureBytes, uint8]
     if f.open(path):
       try:
-        let i = f.readBytes(result, 0, signatureBytes)
+        let i = f.readBytes(buffer, 0, signatureBytes)
+        result = buffer[0..<i]
       except OSError:
         echo "error reading: ", path
       finally:
         f.close()
 
 
-proc bytesToString*(bytes: openarray[uint8]): string =
+proc bytesToString*(bytes: seq[uint8]): string =
   for b in bytes:
     result.add(parseHexStr(toHex(b)))
 
 
-proc bytesToInt*(bytes: openarray[uint8]): int =
-  var byteString: string
+proc bytesToInt*(bytes: seq[uint8]): int =
+  var hexString: string
   for b in bytes:
-    byteString.add(toHex(b))
-  result = parseHexInt(byteString)
+    hexString.add(toHex(b))
+  result = parseHexInt(hexString)
