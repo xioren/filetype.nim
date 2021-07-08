@@ -1,4 +1,4 @@
-proc isWasm*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isWasm*(buf: seq[byte]): tuple[extension, mime: string] =
   ## web assembly
   if buf[0] == 0x00 and
   buf[1] == 0x61 and

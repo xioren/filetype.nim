@@ -1,4 +1,4 @@
-proc is7zip*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc is7zip*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 5 and
   buf[0] == 0x37 and
   buf[1] == 0x7A and
@@ -9,7 +9,7 @@ proc is7zip*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("7z", "application/x-7z-compressed")
 
 
-proc isAr*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isAr*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 6 and
   buf[0] == 0x21 and
   buf[1] == 0x3C and
@@ -21,7 +21,7 @@ proc isAr*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("ar", "application/x-unix-archive")
 
 
-proc isBz2*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isBz2*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 2 and
   buf[0] == 0x42 and
   buf[1] == 0x5A and
@@ -29,7 +29,7 @@ proc isBz2*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("bz2", "application/x-bzip2")
 
 
-proc isCab*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isCab*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   ((buf[0] == 0x4D and
     buf[1] == 0x53 and
@@ -42,7 +42,7 @@ proc isCab*(buf: seq[uint8]): tuple[extension, mime: string] =
      result = ("cab", "application/vnd.ms-cab-compressed")
 
 
-proc isCrx*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isCrx*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x43 and
   buf[1] == 0x72 and
@@ -51,7 +51,7 @@ proc isCrx*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("crx", "application/x-google-chrome-extension")
 
 
-proc isDeb*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isDeb*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 20 and
   buf[0] == 0x21 and
   buf[1] == 0x3C and
@@ -77,7 +77,7 @@ proc isDeb*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("deb", "application/x-deb")
 
 
-proc isEot*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isEot*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 35 and
   (buf[34] == 0x4C and
    buf[35] == 0x50 and
@@ -93,7 +93,7 @@ proc isEot*(buf: seq[uint8]): tuple[extension, mime: string] =
      result = ("eot", "application/octet-stream")
 
 
-proc isEpub*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isEpub*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 57 and
   buf[0] == 0x50 and
   buf[1] == 0x4B and
@@ -130,14 +130,14 @@ proc isEpub*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("epub", "application/epub+zip")
 
 
-proc isExe*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isExe*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 1 and
   buf[0] == 0x4D and
   buf[1] == 0x5A:
     result = ("exe", "application/x-msdownload")
 
 
-proc isGzip*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isGzip*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 2 and
   buf[0] == 0x1F and
   buf[1] == 0x8B and
@@ -145,7 +145,7 @@ proc isGzip*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("gz", "application/gzip")
 
 
-proc isLz*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isLz*(buf: seq[byte]): tuple[extension, mime: string] =
  if buf.len > 3 and
  buf[0] == 0x4C and
  buf[1] == 0x5A and
@@ -154,7 +154,7 @@ proc isLz*(buf: seq[uint8]): tuple[extension, mime: string] =
    result = ("lz", "application/x-lzip")
 
 
-proc isNes*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isNes*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x4E and
   buf[1] == 0x45 and
@@ -163,7 +163,7 @@ proc isNes*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("nes", "application/x-nintendo-nes-rom")
 
 
-proc isPdf*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isPdf*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x25 and
   buf[1] == 0x50 and
@@ -172,14 +172,14 @@ proc isPdf*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("pdf", "application/pdf")
 
 
-proc isPs*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isPs*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 1 and
   buf[0] == 0x25 and
   buf[1] == 0x21:
     result = ("ps", "application/postscript")
 
 
-proc isRar*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isRar*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 6 and
   buf[0] == 0x52 and
   buf[1] == 0x61 and
@@ -192,7 +192,7 @@ proc isRar*(buf: seq[uint8]): tuple[extension, mime: string] =
      result = ("rar", "application/x-rar-compressed")
 
 
-proc isRtf*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isRtf*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 4 and
   buf[0] == 0x7B and
   buf[1] == 0x5C and
@@ -202,7 +202,7 @@ proc isRtf*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("rtf", "application/rtf")
 
 
-proc isSqlite*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isSqlite*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x53 and
   buf[1] == 0x51 and
@@ -211,7 +211,7 @@ proc isSqlite*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("sqlite", "application/x-sqlite3")
 
 
-proc isSwf*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isSwf*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 2 and
   (buf[0] == 0x43 or
    buf[0] == 0x46) and
@@ -220,7 +220,7 @@ proc isSwf*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("swf", "application/x-shockwave-flash")
 
 
-proc isTar*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isTar*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 261 and
   buf[257] == 0x75 and
   buf[258] == 0x73 and
@@ -230,7 +230,7 @@ proc isTar*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("tar", "application/x-tar")
 
 
-proc isXz*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isXz*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 5 and
   buf[0] == 0xFD and
   buf[1] == 0x37 and
@@ -241,7 +241,7 @@ proc isXz*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("xz", "application/x-xz")
 
 
-proc isZ*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isZ*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 1 and
   ((buf[0] == 0x1F and
     buf[1] == 0xA0) or
@@ -250,7 +250,7 @@ proc isZ*(buf: seq[uint8]): tuple[extension, mime: string] =
      result = ("Z", "application/x-compress")
 
 
-proc isZip*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isZip*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x50 and
   buf[1] == 0x4B and

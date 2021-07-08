@@ -1,7 +1,7 @@
 include isobmff
 
 
-proc isAvi*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isAvi*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 10 and
   buf[0] == 0x52 and
   buf[1] == 0x49 and
@@ -13,7 +13,7 @@ proc isAvi*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("avi", "video/x-msvideo")
 
 
-proc isFlv*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isFlv*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x46 and
   buf[1] == 0x4C and
@@ -22,7 +22,7 @@ proc isFlv*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("flv", "video/x-flv")
 
 
-proc isM4v*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isM4v*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 10 and
   buf[0] == 0x0 and
   buf[1] == 0x0 and
@@ -38,7 +38,7 @@ proc isM4v*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("m4v", "video/x-m4v")
 
 
-proc isMkv*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isMkv*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 31 and
   buf[0] == 0x1A and
   buf[1] == 0x45 and
@@ -48,7 +48,7 @@ proc isMkv*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("mkv", "video/x-matroska")
 
 
-proc isMov*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isMov*(buf: seq[byte]): tuple[extension, mime: string] =
   if not isIsobmff(buf):
     return ("", "")
   let
@@ -57,7 +57,7 @@ proc isMov*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("mov", "video/quicktime")
 
 
-proc isMp4*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isMp4*(buf: seq[byte]): tuple[extension, mime: string] =
   if not isIsobmff(buf):
     return ("", "")
   let
@@ -66,7 +66,7 @@ proc isMp4*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("mp4", "video/mp4")
 
 
-proc isMpeg*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isMpeg*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x0 and
   buf[1] == 0x0 and
@@ -76,7 +76,7 @@ proc isMpeg*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("mpeg", "video/mpeg")
 
 
-proc isWebm*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isWebm*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 27 and
   buf[0] == 0x1A and
   buf[1] == 0x45 and
@@ -86,7 +86,7 @@ proc isWebm*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("webm", "video/webm")
 
 
-proc isWmv*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isWmv*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 9 and
   buf[0] == 0x30 and
   buf[1] == 0x26 and

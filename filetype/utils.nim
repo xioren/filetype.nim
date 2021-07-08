@@ -1,16 +1,18 @@
 import os, strutils
 
 
-const signatureBytes* = 262
+const signatureBytes = 262
 
 
 proc getSignatureBytes*(path: string): seq[uint8] =
   if getFileSize(path) == 0:
-    discard
+    # QUESTION: should we use a zero initilized seq that will never match
+    # or skip to next file?
+    result = newSeq[uint8](signatureBytes)
   else:
     var
       f: File
-      buffer: array[signatureBytes, uint8]
+      buffer: array[signatureBytes, byte]
     if f.open(path):
       try:
         let i = f.readBytes(buffer, 0, signatureBytes)
@@ -21,12 +23,12 @@ proc getSignatureBytes*(path: string): seq[uint8] =
         f.close()
 
 
-proc bytesToString*(bytes: seq[uint8]): string =
+proc bytesToString*(bytes: seq[byte]): string =
   for b in bytes:
     result.add(parseHexStr(toHex(b)))
 
 
-proc bytesToInt*(bytes: seq[uint8]): int =
+proc bytesToInt*(bytes: seq[byte]): int =
   var hexString: string
   for b in bytes:
     hexString.add(toHex(b))

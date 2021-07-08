@@ -1,4 +1,4 @@
-proc isAmr*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isAmr*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 11 and
   buf[0] == 0x23 and
   buf[1] == 0x21 and
@@ -9,7 +9,7 @@ proc isAmr*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("amr", "audio/amr")
 
 
-proc isFlac*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isFlac*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x66 and
   buf[1] == 0x4C and
@@ -18,7 +18,7 @@ proc isFlac*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("flac", "audio/x-flac")
 
 
-proc isM4a*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isM4a*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 10 and
   ((buf[4] == 0x66 and
     buf[5] == 0x74 and
@@ -34,7 +34,7 @@ proc isM4a*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("m4a", "audio/m4a")
 
 
-proc isMidi*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isMidi*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x4D and
   buf[1] == 0x54 and
@@ -43,7 +43,7 @@ proc isMidi*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("midi", "audio/midi")
 
 
-proc isMp3*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isMp3*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 2 and
   ((buf[0] == 0x49 and
     buf[1] == 0x44 and
@@ -53,7 +53,7 @@ proc isMp3*(buf: seq[uint8]): tuple[extension, mime: string] =
      result = ("mp3", "audio/mpeg")
 
 
-proc isOgg*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isOgg*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 3 and
   buf[0] == 0x4F and
   buf[1] == 0x67 and
@@ -62,7 +62,7 @@ proc isOgg*(buf: seq[uint8]): tuple[extension, mime: string] =
     result = ("ogg", "audio/ogg")
 
 
-proc isWav*(buf: seq[uint8]): tuple[extension, mime: string] =
+proc isWav*(buf: seq[byte]): tuple[extension, mime: string] =
   if buf.len > 11 and
   buf[0] == 0x52 and
   buf[1] == 0x49 and
