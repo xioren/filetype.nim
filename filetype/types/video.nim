@@ -44,7 +44,8 @@ proc isMkv*(buf: seq[byte]): tuple[extension, mime: string] =
   buf[1] == 0x45 and
   buf[2] == 0xDF and
   buf[3] == 0xA3 and
-  bytesToString(buf[24..31]) == "matroska":
+  (bytesToString(buf[24..31]) == "matroska" or
+   bytesToString(buf[31..38]) == "matroska"):
     result = ("mkv", "video/x-matroska")
 
 
@@ -82,7 +83,8 @@ proc isWebm*(buf: seq[byte]): tuple[extension, mime: string] =
   buf[1] == 0x45 and
   buf[2] == 0xDF and
   buf[3] == 0xA3 and
-  bytesToString(buf[24..27]) == "webm":
+  (bytesToString(buf[24..27]) == "webm" or
+   bytesToString(buf[31..34]) == "webm"):
     result = ("webm", "video/webm")
 
 
