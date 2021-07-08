@@ -42,16 +42,13 @@ proc isGif*(buf: seq[byte]): tuple[extension, mime: string] =
 
 
 proc isHeic*(buf: seq[byte]): tuple[extension, mime: string] =
-  if not is_isobmff(buf):
-      return ("", "")
-  const
-    brands = ["mif1", "msf1"]
-  let
-    (major_brand, minor_version, compatible_brands) = get_ftype(buf)
+  if is_isobmff(buf):
+    const brands = ["mif1", "msf1"]
+    let (major_brand, minor_version, compatible_brands) = get_ftype(buf)
 
-  if major_brand == "heic" or
-  (major_brand in brands and "heic" in compatible_brands):
-    result = ("heic", "image/heic")
+    if major_brand == "heic" or
+    (major_brand in brands and "heic" in compatible_brands):
+      result = ("heic", "image/heic")
 
 
 proc isIco*(buf: seq[byte]): tuple[extension, mime: string] =

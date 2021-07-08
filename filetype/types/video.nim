@@ -50,21 +50,19 @@ proc isMkv*(buf: seq[byte]): tuple[extension, mime: string] =
 
 
 proc isMov*(buf: seq[byte]): tuple[extension, mime: string] =
-  if not isIsobmff(buf):
-    return ("", "")
-  let
-    (majorBrand, minorVersion, compatibleBrands) = getFtype(buf)
-  if majorBrand == "qt  ":
-    result = ("mov", "video/quicktime")
+  if isIsobmff(buf):
+    let
+      (majorBrand, minorVersion, compatibleBrands) = getFtype(buf)
+    if majorBrand == "qt  ":
+      result = ("mov", "video/quicktime")
 
 
 proc isMp4*(buf: seq[byte]): tuple[extension, mime: string] =
-  if not isIsobmff(buf):
-    return ("", "")
-  let
-    (majorBrand, minorVersion, compatibleBrands) = getFtype(buf)
-  if majorBrand in ["mp41", "mp42", "dash", "isom", "iso2", "iso5", "iso6", "avc1"]:
-    result = ("mp4", "video/mp4")
+  if isIsobmff(buf):
+    let
+      (majorBrand, minorVersion, compatibleBrands) = getFtype(buf)
+    if majorBrand in ["mp41", "mp42", "dash", "isom", "iso2", "iso5", "iso6", "avc1"]:
+      result = ("mp4", "video/mp4")
 
 
 proc isMpeg*(buf: seq[byte]): tuple[extension, mime: string] =
